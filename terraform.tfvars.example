@@ -1,0 +1,18 @@
+
+org_id = "000000000000" # format "000000000000"
+
+billing_account = "000000-000000-000000" # format "000000-000000-000000"
+
+default_region = "europe-west1"
+
+authorized_member = "group:group@domain.com" # User or group possible, group:group@domain.com | user:user@domain.com
+automation_sa = "terraform-deployer@<project_id>.iam.gserviceaccount.com" # Service account created with sa_creation.sh script 
+
+parent_folder = "000000000000" # format "000000000000"
+
+api_project = "000000000000" # Project ID format
+
+personal_ip = [  #IPv4 and IPv6 addresses
+    "X.X.X.X/XX", 
+    "X.X.X.X/XX"
+    ]

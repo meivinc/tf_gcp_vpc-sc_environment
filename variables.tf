@@ -117,12 +117,6 @@ variable "firewall_prefix" {
 #   Instance Variable
 # *****************************************/
 
-variable "compute_prefix" {
-  description = "Name prefix to use for compute instance"
-  type        = string
-  default     = "ins"
-}
-
 variable "authorized_member" {
   type        = string
   default     = ""

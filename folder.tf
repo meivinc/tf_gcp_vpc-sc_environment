@@ -1,5 +1,5 @@
 # /******************************************
-#   SERVICE PERIMETER PROJECT
+#   SERVICE PERIMETER FOLDER
 # *****************************************/
 
 resource "google_folder" "secured_folder" {

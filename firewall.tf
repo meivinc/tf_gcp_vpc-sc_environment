@@ -94,7 +94,7 @@ resource "google_compute_firewall" "demo_allow_std_ssh" {
   description   = "Allow ingress ssh "
   network       = module.standard_vpc.network_name
   project       = module.prj_std_testing.project_id
-  source_ranges = ["35.235.240.0/20", "192.168.0.0/24"]
+  source_ranges = ["0.0.0.0/0"]
   target_tags   = ["allow-std-ssh"]
   priority      = 1000
   direction     = "INGRESS"

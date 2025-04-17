@@ -39,17 +39,18 @@ Before diving into the scenarios, ensure you have the following prerequisites in
     *   **Organization Level:** `resourcemanager.organizations.setIamPolicy`
 
 > [!TIP]
-> If you lack the necessary permissions to bind IAM policies to the service account, collaborate with an administrator who possesses these privileges to perform the delegation.
+> If you lack the necessary permissions to bind IAM policies to the service account, collaborate with an administrator who possesses those privileges to perform the delegation.
 
 ## IAM Requirements
 
-The following IAM roles are required for both the Service Account and the User performing the deployments. Carefully review and grant these permissions to ensure successful execution of the Terraform configurations.
+The following IAM roles are required for both the Service Account and the User performing the deployments. Carefully review and grant those permissions to ensure successful execution of the Terraform configurations.
 
 **User:**
 
 *   **Organization Level:**
     *   `roles/accesscontextmanager.policyAdmin`
     *   `roles/resourcemanager.organizationViewer`
+    *   `roles/resourcemanager.organizationAdmin` # Optional
 *   **Folder Level:**
     *   `roles/viewer`
     *   `roles/resourcemanager.folderAdmin`
@@ -69,7 +70,7 @@ The following IAM roles are required for both the Service Account and the User p
 **Service Account:**
 
 *   **Organization Level:**
-    *   `roles/accesscontextmanager.policyReader`
+    *   `roles/accesscontextmanager.policyEditor`
     *   `resourcemanager.projects.setIamPolicy`
 *   **Folder Level:**
     *   `roles/compute.admin`
@@ -144,7 +145,7 @@ chmod +x scripts/sa_creation.sh
 :tada: Congratulation ! Your service account has been automatically created ! :tada:
 
 > [!NOTE]  
-> service account is in format name : terraform-deployer@<project-ID>.iam.gserviceaccount.com
+> service account is in format name : terraform-deployer@\<project-ID\>.iam.gserviceaccount.com
 >
 > Don't forget to associate Billing Account User role 
 
@@ -180,7 +181,7 @@ terraform apply
 4. **Destroy VPC-SC Environment:**
   a. **Destroy terraform configuration:**
 ```bash
-terraform apply
+terraform destroy
 ```
 
   b. **delete Service Account:**
@@ -208,3 +209,5 @@ Your contributions are highly valued! If you have ideas for new scenarios, enhan
 
 *   Open an issue to discuss your proposal and gather feedback.
 *   Submit a pull request with your changes.  Please ensure your code adheres to the project's coding standards and includes relevant documentation.
+*   
+

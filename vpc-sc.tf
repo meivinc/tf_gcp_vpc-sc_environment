@@ -10,7 +10,7 @@ resource "google_access_context_manager_service_perimeter" "service_perimeter" {
   #   }
   # SPEC = DRY RUN 
   # STATUS = ENFORCED
-  status {
+  spec {
     resources = [
       # "projects/<project_number", # FORMAT 
       # "//compute.googleapis.com/projects/prj-com-hpd-network-t4je/global/networks/vpc-hpd", 
@@ -123,7 +123,7 @@ data "google_project" "api_project" {
   project_id = var.api_project # Replace with your actual project ID
 }
 
-resource "time_sleep" "vpc_sc_destroy_wait_180_seconds" {
+resource "time_sleep" "vpc_sc_destroy_wait_300_seconds" {
   depends_on       = [google_access_context_manager_service_perimeter.service_perimeter]
   destroy_duration = "5m"
   # Delay to 5 min, in wait for VPC-SC propagate correctly

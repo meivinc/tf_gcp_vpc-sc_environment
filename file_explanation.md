@@ -104,12 +104,12 @@ This resource defines an Access Level, which represents a set of conditions that
 *   **`ip_subnetworks`**: `concat(...)`
     *   **Purpose**: Specifies a list of allowed IPv4 and IPv6 address ranges (CIDR blocks) from which requests must originate to satisfy this condition.
     *   **Details**: It combines a hardcoded list (`"35.235.240.0/20"`, `"2600:1900::/28"`) (GCP IP) with a list provided by the Terraform variable `var.personal_ip` using the `concat` function.
-    > [!IMPORTANT]
-    > This is the core restriction defined by this Access Level. Only requests originating from IPs within these specified ranges (including those in `var.personal_ip`) will satisfy this condition. This is commonly used to restrict access to corporate networks or specific Bastion host IPs.
+> [!IMPORTANT]
+> This is the core restriction defined by this Access Level. Only requests originating from IPs within these specified ranges (including those in `var.personal_ip`) will satisfy this condition. This is commonly used to restrict access to corporate networks or specific Bastion host IPs.
 *   **`regions`**: (Commented out)
     *   **Purpose**: If uncommented, this would add another condition requiring the request to originate from specific geographic regions (e.g., `"FR"` for France). Since it's commented out, it currently has no effect.
-    > [!WARNING]
-    > Relying solely on region codes for security can be imprecise as geolocation databases might not always be perfectly accurate or up-to-date. IP subnetworks provide a more direct network-level control.
+> [!WARNING]
+> Relying solely on region codes for security can be imprecise as geolocation databases might not always be perfectly accurate or up-to-date. IP subnetworks provide a more direct network-level control.
 
 ---
 
@@ -147,8 +147,8 @@ This section sets up resources intended to reside within a more secure context, 
 *   **`force_destroy`**: `var.bucket_force_destroy` (default: `true`)
     *   **Purpose**: Controls bucket deletion behavior.
     *   **Details**: If `true`, Terraform will delete all objects within the bucket when the bucket itself is destroyed. If `false` (and the bucket contains objects), Terraform will fail to delete the bucket. The default `true` is convenient for ephemeral test environments but should be used cautiously in production.
-    > [!WARNING]
-    > Setting `force_destroy` to `true` can lead to data loss if applied incorrectly in production environments.
+> [!WARNING]
+> Setting `force_destroy` to `true` can lead to data loss if applied incorrectly in production environments.
 *   **`location`**: `var.default_region` (default: "europe-west1")
     *   **Purpose**: Specifies the geographical location where the bucket's data will be stored.
 *   **`storage_class`**: `"STANDARD"`
@@ -271,8 +271,8 @@ This section provisions a VM for the standard environment.
 *   **`project_id`**: `module.prj_std_testing.project_id` - Specifies the "standard testing" project for this VM.
 *   **`iap_binding_member`**: `var.authorized_member`
     *   **Purpose**: Passes the same authorized member variable. The module might still attempt to create an IAP IAM binding.
-    > [!WARNING]
-    > Although an IAP binding might be created via `iap_binding_member`, actual IAP access likely won't work for this instance unless the `allow-iap-ssh` network tag *and* the corresponding IAP firewall rule are also applied. The current configuration relies on the `allow-std-ssh` tag/rule for access.
+> [!WARNING]
+> Although an IAP binding might be created via `iap_binding_member`, actual IAP access likely won't work for this instance unless the `allow-iap-ssh` network tag *and* the corresponding IAP firewall rule are also applied. The current configuration relies on the `allow-std-ssh` tag/rule for access.
 *   **`instance_region`**: `var.default_region` - Same region.
 *   **`public_access`**: *Not specified*.
     *   **Purpose**: The module's default behavior for assigning public IP addresses will apply. If the module defaults to `false`, it won't have a public IP. If it defaults to `true` or doesn't manage the IP allocation explicitly (relying on subnet settings), it might get one.
@@ -433,8 +433,8 @@ This section defines a single firewall rule for the standard environment's VPC n
 *   **`network`**: `module.standard_vpc.network_name` - Applies to the standard VPC network.
 *   **`project`**: `module.prj_std_testing.project_id` - Rule resides in the standard testing project.
 *   **`source_ranges`**: `["0.0.0.0/0"]` - Allows connections from any IP address on the internet or internal networks.
-    > [!WARNING]
-    > Allowing SSH from `0.0.0.0/0` is generally considered insecure for production environments. It exposes the SSH port on tagged VMs to the entire internet. This might be acceptable for a transient test environment but should be restricted (e.g., to specific bastion host IPs or internal ranges) otherwise.
+> [!WARNING]
+> Allowing SSH from `0.0.0.0/0` is generally considered insecure for production environments. It exposes the SSH port on tagged VMs to the entire internet. This might be acceptable for a transient test environment but should be restricted (e.g., to specific bastion host IPs or internal ranges) otherwise.
 *   **`target_tags`**: `["allow-std-ssh"]` - Applies only to VMs with this tag (like `module.standard_instance_1`).
 *   **`priority`**: `1000` - Standard priority for allow rules. Note that there are no explicit `deny` rules shown for the standard network, so it likely relies on GCP's default implicit deny or potentially other lower-priority allow rules not shown here.
 *   **`direction`**: `"INGRESS"`

@@ -82,7 +82,7 @@ resource "google_access_context_manager_service_perimeter" "service_perimeter" {
       }
       egress_to {
         resources = [
-          "projects/${module.prj_sec_compute.project_number}"
+          "projects/${module.prj_std_testing.project_number}"
         ]
         operations {
           service_name = "compute.googleapis.com"

@@ -52,7 +52,7 @@ variable "iap_binding_member" {
 }
 
 variable "allow_update" {
-  description = "allow update of VM from Tf"
+  description = "allow update of VM from terraform"
   type        = string
   default     = false
 

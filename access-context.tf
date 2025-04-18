@@ -1,3 +1,7 @@
+# /******************************************
+#   ACCESS LEVEL CONFIGURATION
+# *****************************************/
+
 resource "google_access_context_manager_access_policy" "folder_policy" {
   parent = "organizations/${var.org_id}"
   scopes = ["folders/${var.parent_folder}"]

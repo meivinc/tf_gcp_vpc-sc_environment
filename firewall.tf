@@ -50,7 +50,7 @@ resource "google_compute_firewall" "demo_allow_ssh" {
 
 resource "google_compute_firewall" "demo_allow_ssh_external" {
   name               = "${var.firewall_prefix}-demo-egress-allow-ssh"
-  description        = "Allow ingress ssh "
+  description        = "Allow ssh between the two vpc"
   network            = module.secured_vpc.network_name
   project            = module.prj_sec_compute.project_id
   destination_ranges = ["172.16.0.0/24"]

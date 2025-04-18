@@ -52,7 +52,7 @@ module "standard_vpc" {
 }
 
 
-resource "google_compute_network_peering" "peering2" {
+resource "google_compute_network_peering" "peering_standard_to_secured" {
   name         = "npr-${var.security_prefix}-to-${var.standard_prefix}"
   network      = module.standard_vpc.network_self_link
   peer_network = module.secured_vpc.network_self_link
